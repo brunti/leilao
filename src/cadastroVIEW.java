@@ -134,16 +134,44 @@ public class cadastroVIEW extends javax.swing.JFrame {
     }//GEN-LAST:event_cadastroNomeActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-    ProdutosDTO produto = new ProdutosDTO();
+    // Pega os valores dos campos
     String nome = cadastroNome.getText();
-    String valor = cadastroValor.getText();
+    String valorText = cadastroValor.getText();
     String status = "A Venda"; // Definido como "A Venda" por padrão
-    produto.setNome(nome);
-    produto.setValor(Integer.parseInt(valor));
-    produto.setStatus(status);
     
-    ProdutosDAO produtodao = new ProdutosDAO();
-    produtodao.cadastrarProduto(produto); // Cadastra o produto no banco de dados
+    // Verifica se algum campo está vazio
+    if (nome.isEmpty() || valorText.isEmpty()) {
+        // Exibe uma mensagem de erro caso algum campo não tenha sido preenchido
+        JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos!", "Erro", JOptionPane.ERROR_MESSAGE);
+    } else {
+        try {
+            // Converte o valor para inteiro
+            int valor = Integer.parseInt(valorText);
+
+            // Cria um objeto do tipo ProdutosDTO
+            ProdutosDTO produto = new ProdutosDTO();
+            produto.setNome(nome);
+            produto.setValor(valor);
+            produto.setStatus(status);
+            
+            // Cria o objeto DAO e chama o método para cadastrar o produto
+            ProdutosDAO produtodao = new ProdutosDAO();
+            produtodao.cadastrarProduto(produto); // Cadastra o produto no banco de dados
+            
+            // Exibe uma mensagem de sucesso após o cadastro
+            JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            
+            // Limpa os campos após cadastro
+            cadastroNome.setText("");
+            cadastroValor.setText("");
+        } catch (NumberFormatException e) {
+            // Caso o valor não seja um número válido
+            JOptionPane.showMessageDialog(this, "Por favor, insira um valor válido para o preço!", "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            // Caso ocorra algum outro erro
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar o produto. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
