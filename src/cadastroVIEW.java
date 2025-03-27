@@ -1,15 +1,6 @@
 
 import javax.swing.JOptionPane;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-/**
- *
- * @author Adm
- */
 public class cadastroVIEW extends javax.swing.JFrame {
 
     /**
@@ -28,7 +19,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblTexto = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -41,8 +32,8 @@ public class cadastroVIEW extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Lucida Fax", 0, 24)); // NOI18N
-        jLabel1.setText("Sistema de Leilões");
+        lblTexto.setFont(new java.awt.Font("Lucida Fax", 0, 24)); // NOI18N
+        lblTexto.setText("Sistema de Leilões");
 
         jLabel3.setText("Cadastre um novo produto");
 
@@ -84,7 +75,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
                         .addComponent(btnCadastrar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(154, 154, 154)
-                        .addComponent(jLabel1)))
+                        .addComponent(lblTexto)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -112,7 +103,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(55, 55, 55)
-                .addComponent(jLabel1)
+                .addComponent(lblTexto)
                 .addGap(30, 30, 30)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -129,7 +120,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
                 .addComponent(btnCadastrar)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(btnProdutos)
                 .addGap(22, 22, 22))
         );
@@ -143,44 +134,16 @@ public class cadastroVIEW extends javax.swing.JFrame {
     }//GEN-LAST:event_cadastroNomeActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-       try {
-        // Obtendo os valores dos campos de texto
-        String nome = cadastroNome.getText().trim();
-        String valorTexto = cadastroValor.getText().trim();
-        
-        // Verificação para evitar inserção de dados vazios
-        if (nome.isEmpty() || valorTexto.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Nome e Valor não podem estar vazios!", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Convertendo o valor para inteiro
-        int valor;
-        try {
-            valor = Integer.parseInt(valorTexto);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "O campo Valor deve ser um número válido!", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Criando o objeto ProdutoDTO e preenchendo os atributos
-        ProdutosDTO produto = new ProdutosDTO();
+    ProdutosDTO produto = new ProdutosDTO();
+        String nome = cadastroNome.getText();
+        String valor = cadastroValor.getText();
+        String status = "A Venda";
         produto.setNome(nome);
-        produto.setValor(valor);
-        produto.setStatus("A Venda");
-
-        // Criando o objeto DAO e cadastrando o produto
+        produto.setValor(Integer.parseInt(valor));
+        produto.setStatus(status);
+        
         ProdutosDAO produtodao = new ProdutosDAO();
         produtodao.cadastrarProduto(produto);
-
-        // Exibindo mensagem de sucesso e limpando os campos
-        JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-        cadastroNome.setText("");
-        cadastroValor.setText("");
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Erro ao cadastrar produto: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-    }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
@@ -228,11 +191,11 @@ public class cadastroVIEW extends javax.swing.JFrame {
     private javax.swing.JButton btnProdutos;
     private javax.swing.JTextField cadastroNome;
     private javax.swing.JTextField cadastroValor;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblTexto;
     // End of variables declaration//GEN-END:variables
 }///
