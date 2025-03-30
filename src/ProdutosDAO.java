@@ -78,7 +78,8 @@ public class ProdutosDAO {
     }
 }
 
-   public List<ProdutosDTO> listarProdutosVendidos() {
+   public List<ProdutosDTO> listarProdutosVendidos() // lista
+   {
     List<ProdutosDTO> listaProdutos = new ArrayList<>();
     String sql = "SELECT * FROM produtos WHERE status = 'Vendido'";
     
